@@ -58,6 +58,38 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  window.addEventListener('keydown', function(event){
+    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${event.keyCode}"]`); //Selects any element with the class of key && and the data-ley attribute = to the key number.
+    if(!audio) return; //Stop the function from running all together
+    audio.currentTime = 0;//Rewind to the beginning of the audio
+    audio.play();
+
+    key.classList.add("playing");
+  });
+
+  //Refactor Version (This allows you to be able to call for this play sound effect when your listening to something else)
+  /*function playSound(event){
+    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+
+    if(!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+
+    key.classList.add("playing");
+  };
+*/
+  function removeTransition(event){//this function helps determine when the animation is done and what to do when it is done.
+    if (event.propertyName !== 'transform') return; //Skip it if it is not a transfrom
+
+    this.classList.remove('playing');
+  };
+
+  const keys = document.querySelectorAll(".key"); //Returns an array of all the elements that have this class in HTML and so we can use this information to know what key isbeing pressed and how to be able to react
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  
+  // window.addEventListener('keydown', playSound);
 
 </script>
 
