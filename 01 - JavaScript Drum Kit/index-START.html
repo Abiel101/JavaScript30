@@ -61,6 +61,7 @@
   window.addEventListener('keydown', function(event){
     const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
     const key = document.querySelector(`.key[data-key="${event.keyCode}"]`); //Selects any element with the class of key && and the data-ley attribute = to the key number.
+    
     if(!audio) return; //Stop the function from running all together
     audio.currentTime = 0;//Rewind to the beginning of the audio
     audio.play();
@@ -88,7 +89,7 @@
 
   const keys = document.querySelectorAll(".key"); //Returns an array of all the elements that have this class in HTML and so we can use this information to know what key isbeing pressed and how to be able to react
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  
+
   // window.addEventListener('keydown', playSound);
 
 </script>
